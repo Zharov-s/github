@@ -1,0 +1,99 @@
+/* Apple Minimal Reset — removes non-Apple visual flourishes and enforces strict rectangles. */
+:root{
+  --bg:#ffffff;
+  --bg2:#ffffff;
+  --surface:#ffffff;
+  --surface-strong:#f5f5f7;
+  --surface-soft:#f5f5f7;
+  --surface-border:#d2d2d7;
+  --text:#000000;
+  --muted:#3a3a3c;
+  --accent:#0071e3;
+  --accent-rgb:0,113,227;
+  --radius:0;
+  --shadow:none;
+  --shadow-soft:none;
+}
+
+/* Typography: San Francisco / system */
+html, body{
+  background:#ffffff !important;
+  color:#000000 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Rectangles only, remove all rounding/shadows */
+*, *::before, *::after{
+  border-radius:0 !important;
+  box-shadow:none !important;
+  text-shadow:none !important;
+}
+
+/* Images must be unrounded */
+img, picture, video, canvas{ border-radius:0 !important; }
+
+/* Remove decorative gradients/overlays/background patterns */
+body{ background-image:none !important; }
+.tg-grid-bg, .tg-dots-bg, .tg-rings-bg{ background:none !important; }
+.hero-banner::after, .hero-overlay{ content:none !important; display:none !important; }
+
+/* Flatten common components */
+.hero-banner, .header-inner, .glass-btn, .right-panel, .panel-nav a, .panel-widget,
+.room-card, .tg-card, .tg-badge, .tg-pill, .tg-cta,
+.mini-gallery .mg-prev, .mini-gallery .mg-next, .conf-3d__face, .conf-3d__nav{
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* Buttons: neutral Apple-like */
+.glass-btn{
+  border:1px solid #d2d2d7 !important;
+  background:#ffffff !important;
+  color:#000000 !important;
+  border-radius:0 !important;
+  transition: background-color .15s ease, transform .05s ease !important;
+}
+.glass-btn:hover{ transform:none !important; }
+.glass-btn.accent{
+  background:#000000 !important;
+  color:#ffffff !important;
+  border-color:#000000 !important;
+}
+
+/* Header/topbar */
+header.site-header, .topbar, .topbar__inner{
+  background:#ffffff !important;
+  border:0 !important;
+}
+
+/* Text colors */
+h1,h2,h3,h4,h5,h6{ color:#000000 !important; letter-spacing:0; }
+p{ color:#3a3a3c !important; }
+
+/* Simplify 3D carousel visuals (keep function, remove glow/shadows/radii) */
+.conf-3d{ height:420px; }
+.conf-3d__face{ background:#f5f5f7 !important; border:1px solid #e5e5ea !important; }
+.conf-3d__nav{ background:#000000 !important; color:#ffffff !important; border-radius:0 !important; }
+
+/* Mobile-first spacing refinement */
+.section{ margin: clamp(32px, 6vw, 80px) 0 !important; }
+.page-content > main.wrapper{ gap: clamp(20px, 3vw, 48px) !important; }
+
+/* Brand kit variables to remove shadows/radii */
+:root{
+  --tg-radius:0;
+  --tg-radius-lg:0;
+  --tg-shadow:none;
+  --tg-shadow-soft:none;
+}
+
+/* Kill excessive transitions/animations globally */
+*{
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Keep focus outlines for accessibility */
+:focus{ outline: 2px solid #0071e3 !important; outline-offset: 2px !important; }

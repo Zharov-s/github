@@ -1,0 +1,102 @@
+/* Telegraph — InfiniteCarousel styles (Apple-like minimal) */
+.ic{
+  --ic-radius: clamp(12px, 1.4vw, 18px);
+  --ic-height: clamp(180px, 30vw, 380px);
+  --ic-gap: clamp(12px, 2vw, 24px);
+  --ic-fade: 80px;
+  position: relative;
+  margin-top: clamp(16px, 3vw, 28px);
+  outline: none;
+}
+.ic:focus-visible{ outline: 2px solid rgba(0,113,227,0.9); outline-offset: 4px; }
+
+.ic-viewport{
+  height: var(--ic-height);
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y; /* allow vertical scroll while handling horizontal drag */
+}
+
+/* Subtle edge fades for premium look */
+.ic-viewport::before,
+.ic-viewport::after{
+  content:"";
+  position:absolute;
+  top:0; bottom:0;
+  width: var(--ic-fade);
+  pointer-events:none;
+  z-index: 2;
+  background: linear-gradient(90deg, rgba(10,13,19,1), rgba(10,13,19,0));
+}
+.ic-viewport::before{ left:0; }
+.ic-viewport::after{
+  right:0;
+  transform: scaleX(-1);
+}
+
+/* Track and items */
+.ic-track{
+  display: flex;
+  align-items: center; /* vertically center images */
+  gap: var(--ic-gap);
+  height: 100%;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+  -webkit-font-smoothing: antialiased;
+  padding: 2px; /* for crisp rounded corners next to fades */
+}
+
+.ic[data-dragging="1"] .ic-track{ cursor: grabbing; }
+.ic .ic-track{ cursor: grab; }
+
+.ic-item{
+  flex: 0 0 auto; /* no shrink to preserve spacing */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* ensure rounded corners clip */
+  border-radius: var(--ic-radius);
+}
+
+.ic-item img{
+  height: 100%;   /* always fill container height */
+  width: auto;    /* adapt by width */
+  object-fit: cover;
+  display: block;
+  image-rendering: auto;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none; /* allow dragging without selecting image */
+  border-radius: var(--ic-radius);
+}
+
+/* High-DPI sharpening hint */
+@media (min-resolution: 2dppx){
+  .ic-item img{ image-rendering: -webkit-optimize-contrast; }
+}
+
+/* Header above the carousel track */
+.ic-header{
+  display:flex;
+  flex-direction:column;
+  gap: clamp(2px, .4vw, 6px);
+  margin-bottom: clamp(8px, 1.6vw, 14px);
+  padding: 0 2px;
+}
+.ic-header .ic-title{
+  margin:0;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.2;
+}
+.ic-header .ic-sub{
+  margin:0;
+  opacity:.88;
+  font-size: clamp(14px, 1.2vw, 16px);
+}
+@media (max-width: 640px){
+  .ic-header{ gap: 4px; margin-bottom: 10px; }
+}
